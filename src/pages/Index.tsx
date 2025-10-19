@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TonConnectButton } from '@tonconnect/ui-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,11 +8,13 @@ import Icon from '@/components/ui/icon';
 import CaseCard from '@/components/CaseCard';
 import CrashGame from '@/components/CrashGame';
 import UserProfile from '@/components/UserProfile';
+import WithdrawModal from '@/components/WithdrawModal';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('cases');
   const [balance, setBalance] = useState(10000);
   const [inventory, setInventory] = useState<any[]>([]);
+  const [showWithdrawModal, setShowWithdrawModal] = useState(false);
 
   const cases = [
     {
@@ -69,6 +72,10 @@ const Index = () => {
     setInventory(prev => [...prev, wonItem]);
   };
 
+  const handleWithdraw = (amount: number) => {
+    setBalance(prev => prev - amount);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 dark">
       <header className="border-b border-border/40 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
@@ -88,9 +95,15 @@ const Index = () => {
                   <span className="text-muted-foreground text-sm">TON</span>
                 </div>
               </Card>
-              <Button variant="outline" size="icon" className="border-primary/20">
-                <Icon name="User" className="text-primary" size={20} />
+              <Button 
+                variant="outline" 
+                className="border-primary/20 text-primary hover:bg-primary/10"
+                onClick={() => setShowWithdrawModal(true)}
+              >
+                <Icon name="ArrowDownToLine" className="mr-2" size={18} />
+                Вывести
               </Button>
+              <TonConnectButton />
             </div>
           </div>
         </div>
@@ -246,6 +259,13 @@ const Index = () => {
           <p>© 2025 NFT Cases. Игровая платформа с NFT наградами</p>
         </div>
       </footer>
+
+      <WithdrawModal
+        open={showWithdrawModal}
+        onOpenChange={setShowWithdrawModal}
+        balance={balance}
+        onWithdraw={handleWithdraw}
+      />
     </div>
   );
 };

@@ -1,0 +1,37 @@
+{
+  "tests": [
+    {
+      "name": "Valid withdrawal request",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "userId": "user123",
+        "amount": 1000,
+        "walletAddress": "UQDxxx...example"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "withdrawalId": "string",
+        "status": "string",
+        "amount": 1000
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Amount too small",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "userId": "user123",
+        "amount": 50,
+        "walletAddress": "UQDxxx...example"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "Amount too small"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
