@@ -1,3 +1,5 @@
 {
+  "ton-deposit": "https://functions.poehali.dev/1ea745e7-c74d-4045-941f-5356a0dc4def",
+  "user-api": "https://functions.poehali.dev/a63687ab-0c9b-4890-8cee-9ac0bc1bf1c2",
   "ton-withdraw": "https://functions.poehali.dev/88a5acbe-a7b9-4af0-a8a3-cb1fb5dacfbf"
 }

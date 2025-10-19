@@ -9,12 +9,14 @@ import CaseCard from '@/components/CaseCard';
 import CrashGame from '@/components/CrashGame';
 import UserProfile from '@/components/UserProfile';
 import WithdrawModal from '@/components/WithdrawModal';
+import DepositModal from '@/components/DepositModal';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('cases');
   const [balance, setBalance] = useState(10000);
   const [inventory, setInventory] = useState<any[]>([]);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const [showDepositModal, setShowDepositModal] = useState(false);
 
   const cases = [
     {
@@ -76,6 +78,10 @@ const Index = () => {
     setBalance(prev => prev - amount);
   };
 
+  const handleDeposit = (amount: number) => {
+    setBalance(prev => prev + amount);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 dark">
       <header className="border-b border-border/40 bg-card/50 backdrop-blur-sm sticky top-0 z-50">
@@ -95,6 +101,14 @@ const Index = () => {
                   <span className="text-muted-foreground text-sm">TON</span>
                 </div>
               </Card>
+              <Button 
+                variant="default" 
+                className="bg-primary hover:bg-primary/90"
+                onClick={() => setShowDepositModal(true)}
+              >
+                <Icon name="Plus" className="mr-2" size={18} />
+                Пополнить
+              </Button>
               <Button 
                 variant="outline" 
                 className="border-primary/20 text-primary hover:bg-primary/10"
@@ -259,6 +273,12 @@ const Index = () => {
           <p>© 2025 NFT Cases. Игровая платформа с NFT наградами</p>
         </div>
       </footer>
+
+      <DepositModal
+        open={showDepositModal}
+        onOpenChange={setShowDepositModal}
+        onDeposit={handleDeposit}
+      />
 
       <WithdrawModal
         open={showWithdrawModal}

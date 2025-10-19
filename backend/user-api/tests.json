@@ -1,0 +1,16 @@
+{
+  "tests": [
+    {
+      "name": "Get user data",
+      "method": "GET",
+      "path": "/?wallet=UQTest123",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "user": {
+          "wallet_address": "string"
+        }
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

@@ -1,16 +1,18 @@
 {
   "tests": [
     {
-      "name": "Amount too small",
+      "name": "Process deposit",
       "method": "POST",
       "path": "/",
       "body": {
         "wallet_address": "UQTest123",
-        "amount": 50
+        "amount": 100,
+        "tx_hash": "test_hash_123"
       },
-      "expectedStatus": 400,
+      "expectedStatus": 200,
       "expectedBody": {
-        "error": "Amount too small"
+        "success": true,
+        "balance": "number"
       },
       "bodyMatcher": "partial"
     }
